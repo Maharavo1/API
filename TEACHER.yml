@@ -1,0 +1,101 @@
+openapi: '3.0.2'
+info:
+  title: API Enseignants et Cours
+  description: API pour récupérer les informations des enseignants
+  contact:
+    email: hei.maharavo@gmail.com
+  version: '1.0'
+servers:
+  - url: https://ENSEIGNANTS.HEI
+
+paths:
+  /enseignants:
+    post:
+      tags:
+        - Enseignant
+      summary: Créer un nouvel enseignant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntreeEnseignant'
+      responses:
+        '201':
+          description: Enseignant créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReponseEnseignant'
+        '500':
+          description: Erreur Interne du Serveur
+
+    get:
+      tags:
+        - Enseignant
+      summary: Obtenir l'ID de l'enseignant
+      responses:
+        '200':
+          description: Opération réussie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReponseEnseignant'
+        '500':
+          description: Erreur Interne du Serveur
+
+components:
+  schemas:
+    ReponseEnseignant:
+      type: object
+      properties:
+        nom:
+          type: string
+          example: Ryan
+        cours:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cours'
+            
+    Cours:
+      type: object
+      properties:
+        nom:
+          type: string
+          example: API
+        code:
+          type: string
+          example: POSTMAN
+        duree:
+          type: string
+          example: 2 heures
+        age:
+          type: integer
+          example: 21
+
+    EntreeEnseignant:
+      type: object
+      properties:
+        nom:
+          type: string
+          example: Lou
+        cours:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntreeCours'
+            
+    EntreeCours:
+      type: object
+      properties:
+        nom:
+          type: string
+          example: SYS2
+        code:
+          type: string
+          example: VPC
+        duree:
+          type: string
+          example: 2 heures
+        age:
+          type: integer
+          example: 30

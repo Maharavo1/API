@@ -1,0 +1,134 @@
+openapi: '3.0.2'
+info:
+  title: Intégration
+  description: STD22080
+  contact:
+    email: hei.maharavo@gmail.com
+  version: '1.0'
+servers:
+  - url: https://STD22080.com
+ 
+paths:
+  /etudiants:
+    get:
+      tags:
+        - "Étudiant" 
+      summary: Obtenir les étudiants
+      responses:
+        '200':
+          description: Opération réussie
+          content:
+            application/json:
+              schema:
+               $ref: '#/components/schemas/ReponseEtudiants'
+        
+        '500': 
+          description: Erreur Interne du Serveur
+
+    post:
+      tags:
+        - "Étudiant"
+      summary: Ajouter un étudiant 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntreeEtudiant'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReponseAjoutEtudiant'
+
+        '500':
+          description: Erreur Interne du Serveur
+
+    put:
+      tags:
+        - "Étudiant"
+      summary: Mettre à jour un étudiant
+      parameters:
+        - name: idEtudiant
+          in: path
+          required: true
+          description: L'ID de l'étudiant à mettre à jour
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntreeEtudiant'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReponseEtudiants'
+
+        '500':
+          description: Erreur Interne du Serveur
+
+    delete:
+      tags:
+        - "Étudiant"
+      summary: Supprimer un étudiant
+      parameters:
+        - name: idEtudiant
+          in: path
+          required: true
+          description: L'ID de l'étudiant à supprimer
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Aucun contenu
+          
+        '500':
+          description: Erreur Interne du Serveur  
+components:
+  schemas:
+    ReponseEtudiants:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: STD22080
+        nom:
+          type: string
+          example: Maharavo
+        dateNaissance: 
+          type: string
+          format: date
+          example: 2003-07-12
+    ReponseAjoutEtudiant:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: STD22080
+        nom:
+          type: string
+          example: Maharavo
+        dateNaissance: 
+          type: string
+          format: date
+          example: 2003-07-12
+    EntreeEtudiant:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: Nouvel ID
+        nom:
+          type: string
+          example: NouvelÉtudiant
+        dateNaissance: 
+          type: string
+          format: date
+          example: Date de naissance

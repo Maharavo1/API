@@ -1,0 +1,2 @@
+LIEN **https://petstore.swagger.io/?url=https://raw.githubusercontent.com/Maharavo1/API/api/STUDENT.yml**
+**https://petstore.swagger.io/?url=https://raw.githubusercontent.com/Maharavo1/API/api/TEACHER.yml**
